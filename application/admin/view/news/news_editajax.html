@@ -1,0 +1,148 @@
+{extend name="public:layout" /}
+{block name="body"}
+<body>
+
+<article class="page-container">
+	<form class="form form-horizontal" id="form-article-add" action="{:url('admin/News/newsEdit')}" method="post">
+	<input type='hidden' id='id' value='{$msg.id}'/>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>文章标题：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{$msg.title}" placeholder="" id="artitle" name="title">
+			</div>
+		</div>
+		
+		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>文章类型：</label>
+			<div class="formControls col-xs-8 col-sm-9"> <span class="select-box">
+				<select name="cid" class="select" id="cid">					<option value="1">公司新闻</option>
+					<option value="2">行业新闻</option>
+				</select>
+				</span> </div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">排序值：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{$msg.sort}" placeholder="" id="sort" name="sort">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">关键词：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{$msg.keywords}" placeholder="" id="keywords" name="keywords">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">文章摘要：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<textarea name="" cols="" rows="" class="textarea"  placeholder="说点什么...最少输入10个字符" datatype="*10-100" dragonfly="true" nullmsg="备注不能为空！" onKeyUp="textarealength(this,200)"></textarea>
+				<p class="textarea-numberbar"><em class="textarea-length">0</em>/200</p>
+			</div>
+		</div>
+		
+		<!-- <div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">缩略图：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<div class="uploader-thum-container">
+					<div id="fileList" class="uploader-list"></div>
+					<div id="filePicker">选择图片</div>
+					<button id="btn-star" class="btn btn-default btn-uploadstar radius ml-10">开始上传</button>
+				</div>
+			</div>
+		</div> -->
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">文章内容：</label>
+			<div class="formControls col-xs-8 col-sm-9"> 
+				<textarea name="content" id="editor">{$msg.content}</textarea> 
+				<script id="" name="content" type="text/plain" style="width:100%;height:400px;"></script> 
+			
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+				<button onClick="" class="btn btn-primary radius" type="button" id="sub"><i class="Hui-iconfont">&#xe632;</i> 保存并提交</button>
+				
+				<button onClick='javascript:location.href="{:url('Admin/News/index')}' class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+			</div>
+		</div>
+	</form>
+</article>
+
+
+</body>
+{/block}
+{block name="script"}
+<script type="text/javascript" src="__ADMIN__/lib/ueditor/1.4.3/ueditor.config.js"></script>
+<script type="text/javascript" src="__ADMIN__/lib/ueditor/1.4.3/ueditor.all.min.js"> </script>
+<script type="text/javascript" src="__ADMIN__/lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
+
+<script type="text/javascript">
+{literal}
+$(function(){
+	var ue = UE.getEditor('editor');
+});
+{/literal}
+</script>
+<script type="text/javascript">
+
+/*$('#cid').change(function(){
+    var cid=$(this).val();
+    $.post("", { "userid": user },//去后台查询数据  没完成
+       function(data){//data 返回的数据
+            arlet();      
+        }, "json");
+})*/
+ 
+       /* $.ajax({
+    	type: "POST",// 请求方式
+    	url:"{:url('newsEdit')}",// 请求url地址
+    	data: 
+    	{
+    		id:   $("#id").val(),
+    		title:$("#artitle").val(),
+    		cid:  $("#cid").val(),
+    		sort: $("#sort").val(),
+    		keywords:$("#keywords").val(),
+    		content:$("#editor").text()
+    	},
+    	dataType: "json",// 数据返回类型
+    	success: function(re){
+    		// 请求发送成功后执行的函数,data是返回的数据。
+    		alert();
+    	},
+    	timeout: 3000,// 超时设置,如果3秒内请求无响应,则执行error定义的方法
+    	error: function(){
+    		// code
+    	},
+    	//async：true,// 默认设置为true，所有请求均为异步请求。
+    })
+ });*/
+{/literal}
+</script>
+<script type="text/javascript">
+
+  var params = {};
+      params.id = $('#id').val();
+      params.title = $('#artitle').val();
+      params.cid = $("#cid").val();
+      params.sort = $("#sort").val();
+      params.keywords = $("#keywords").val();
+      params.content = $("#editor").val();
+ $('#sub').click(function(){
+ 	$.post("{:url('admin/News/newsEdit')}",params,function(re){
+        	console.log(re.status);
+           if(re.status==0){
+               layer.msg(re.msg,{icon:1});
+               alert(params);
+           }else{
+               //layer.msg(re.msg,{icon:2});
+               alert();
+           }
+        });
+
+ });
+
+</script>
+{/block}
+</html>
