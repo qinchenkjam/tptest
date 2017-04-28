@@ -30,22 +30,33 @@ class Article extends Model
         //$map['is_show']=1;
 
         //$lists=Article::where(["is_show"=>1])->alias('a')->join('__ARTICLE_CATE__ b ','b.cat_id= a.cat_id')->order('id asc')->paginate($limit);
-       $lists=Article::where($map)->alias('a')->join('__ARTICLE_CATE__ b ','b.cat_id= a.cat_id')->order('id asc')->paginate($limit);    	
+       $lists=Article::where($map)->alias('a')->join('__ARTICLE_CATE__ b ','b.cat_id= a.cat_id')->order('id desc')->paginate($limit);    	
         return $lists;
     }
 
     /*数据分类查询*/
     public static function clist($cat_id=0,$limit=4){
-        $lists=Article::where(['cat_id'=>$cat_id])->order('sort asc')->paginate($limit);
+        $lists=Article::where(['cat_id'=>$cat_id])->order('sort desc')->paginate($limit);
     	// $lists=Article::where([])->order('id asc')->select();
         return $lists;
     }
 
 
-    /*删除数据*/
+    /*删除一条数据*/
     public static function dels($id){
     	$res=Article::where(["id"=>$id])->delete();
     	return $res;
+    }
+
+    /*删除数据*/
+    public static function del_all($map){
+        //$info=Product::where(["id"=>$id])->delete();
+        $info=Article::where($map)->delete();
+        if ($info) {
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /*查询一条数据*/

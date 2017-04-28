@@ -49,4 +49,13 @@ class ArticleCate extends Model
         }
     }
 
+    /*分类名是否存在*/
+    public static function is_exist($cat_name){
+        // dump($data);
+        $info=ArticleCate::where(["cat_name"=>$cat_name])->field('cat_name')->select();
+        if ($info) {
+            return true;
+        }
+    }
+
 }

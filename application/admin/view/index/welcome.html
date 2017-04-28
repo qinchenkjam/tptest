@@ -22,7 +22,7 @@
 </head>
 <body>
 <div class="page-container">
-	<p class="f-20 text-success">欢迎您！今天是
+	<p class="f-20 text-success">{$Think.session.aname}欢迎您！今天是
 				{php}
 				$week= array('日','一','二','三','四','五','六');
 				echo date('Y年m月d日').' 星期'.$week[date('w')];

@@ -149,7 +149,7 @@ return [
     // 默认跳转页面对应的模板文件
    /* 'dispatch_success_tmpl'  => THINK_PATH . 'tpl' . DS . 'dispatch_jump.tpl',
     'dispatch_error_tmpl'    => THINK_PATH . 'tpl' . DS . 'dispatch_jump.tpl',*/
-     'dispatch_success_tmpl'  =>'public/jump_url',
+    'dispatch_success_tmpl'  =>'public/jump_url',
     'dispatch_error_tmpl'    => 'public/jump_url',
 
     // +----------------------------------------------------------------------
@@ -177,6 +177,8 @@ return [
         'path'  => LOG_PATH,
         // 日志记录级别
         'level' => [],
+        // error和sql日志单独记录
+        'apart_level'   =>  ['error','sql'],
     ],
 
     // +----------------------------------------------------------------------

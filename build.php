@@ -13,11 +13,11 @@ return [
     // 生成应用公共文件
     '__file__' => ['common.php', 'config.php', 'database.php','function.php'],
 
-    // 定义模块的自动生成 （按照实际定义的文件名生成）
+    /*// 定义模块的自动生成 （按照实际定义的文件名生成）
     'index'     => [
         '__file__'   => ['common.php'],
         '__dir__'    => ['controller', 'view'],
-        'controller' => ['Index', 'Product', 'Article','Page','Base'],   
+        'controller' => ['Index', 'Product', 'Article','Pages','Base'],   
         'view'       => ['index/index','product/index','product/pro_detail','page/pages','article/index','article/ar_detail'],
      ],
     // 其他更多的模块定义   
@@ -26,8 +26,7 @@ return [
         '__dir__'    => ['behavior', 'controller', 'view','validate'],
         'controller' => ['Index', 'Product', 'Article','Banner','Page','Admin', 'System','Base','Link','Nav'
                       ],      
-       /* 'view'      => ['index/index','product/index','article/index','page/index','admin/index','system/index',
-            'banner/index','link/index','nav/index'],*/
+     
     ],
 
     // 其他更多的模块定义   
@@ -35,5 +34,5 @@ return [
         '__dir__'    => ['behavior', 'model'],      
         'model'      => ['Index', 'Product', 'Article','Banner','Page','Admin', 'System','Base','Link','Nav'],
         
-    ],
+    ],*/
 ];

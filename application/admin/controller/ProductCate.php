@@ -28,6 +28,8 @@ class ProductCate extends Base
            $data=input('post.');
            $inserts=\app\common\model\ProductCate::insert($data);
            if($inserts){
+            //行为记录
+            action_log('add_product_cat', 'product', $res, session('aid'));
                 return $this->success('添加成功','admin/product/cateIndex');
                 //return $this->success('添加成功',url('Product/cateIndex'));
             }else{
@@ -40,10 +42,40 @@ class ProductCate extends Base
     }
 
     public function cateEdit($id)
-    {
-       $msg=\app\common\model\ProductCate::finds($id);      
-       $this->assign("msg",$msg);
-       return $this->fetch('product/cate_edit');
+    {     
+       if(request()->isPost()){           
+        $data=input('post.cat_name');
+        $id=input("param.cat_id");
+       //dump($data);exit;
+         $list=\app\common\model\ProductCate::is_exist($data);
+        //var_dump($list);exit();
+          if(!empty($list)){         
+              $this->error('分类已存在');            
+          }
+        $edit=\app\common\model\ProductCate::updatemsgs($data,$id);
+      
+         
+        }else{
+          $id=input("get.id");     
+          $msg=\app\common\model\ProductCate::finds($id);
+          //dump($msg['pid']);exit;
+        /*$Tree = new \util\Tree;
+        $list=\app\common\model\ProductCate::lists(10);           
+        $lists=$Tree->tree($list);
+        $select='';
+        foreach ($lists as $key => $value){
+                  if($value['cat_id']==$msg['pid']){
+                    
+                    $select="selected";
+                  }
+
+          } 
+         
+          $this->assign('selected',$select);
+          $this->assign('lists',$lists); */     
+          $this->assign('msg', $msg);
+          return $this->fetch('product/cate_edit');
+        }
     }
 
 

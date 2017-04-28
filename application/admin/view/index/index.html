@@ -53,7 +53,7 @@
 					<li class="dropDown dropDown_hover"> <a href="#" class="dropDown_A">admin <i class="Hui-iconfont">&#xe6d5;</i></a>
 						<ul class="dropDown-menu menu radius box-shadow">
 							<li><a href="#">个人信息</a></li>
-							<li><a href="#">切换账户</a></li>
+							<!-- <li><a href="#">切换账户</a></li> -->
 							<li><a href="#" onClick="log_out()">退出</a></li>
 						</ul>
 					</li>
@@ -126,6 +126,7 @@
 				</ul>
 			</dd>
 		</dl> -->
+		{if condition="$Think.session.aid EQ 1"}
 		<dl id="menu-admin">
 			<dt><i class="Hui-iconfont">&#xe62d;</i> 管理员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
@@ -136,6 +137,7 @@
 				</ul>
 			</dd>
 		</dl>
+		{/if}
 		<!-- <dl id="menu-tongji">
 			<dt><i class="Hui-iconfont">&#xe61a;</i> 系统统计<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
@@ -158,11 +160,12 @@
 					<li><a _href="{:url('admin/Banner/index')}" data-title="滚动图管理" href="javascript:void(0)">幻灯片管理</a></li>
 					<li><a _href="{:url('admin/FriendLink/index')}" data-title="友情链接" href="javascript:void(0)">友情链接</a></li>
 					<li><a _href="{:url('admin/Page/index')}" data-title="栏目管理" href="javascript:void(0)">单页面管理</a></li>
-					<li><a _href="{:url('admin/Template/index')}" data-title="系统设置" href="javascript:void(0)">模板设置</a></li> 
+					<li><a _href="{:url('admin/Template/inedex')}?t=pc"  data-title="系统设置" href="javascript:void(0)">模板设置</a></li> 
+					<li><a _href="{:url('admin/Template/index')}" data-title="系统设置" href="javascript:void(0)">模板设置</a></li>
 					<!-- <li><a _href="system-category.html" data-title="栏目管理" href="javascript:void(0)">栏目管理</a></li>
 					<li><a _href="system-data.html" data-title="数据字典" href="javascript:void(0)">数据字典</a></li>
 					<li><a _href="system-shielding.html" data-title="屏蔽词" href="javascript:void(0)">屏蔽词</a></li> -->
-					<li><a _href="{:url('admin/log/index')}" data-title="系统日志" href="javascript:void(0)">系统日志</a></li>
+					<li><a _href="{:url('admin/ActionLog/index')}" data-title="系统日志" href="javascript:void(0)">系统日志</a></li>
 				</ul>
 			</dd>
 		</dl>

@@ -56,7 +56,7 @@ class Admin extends Base
 
      public function removeinfo($id)
     {  
-        $id=input('param.cat_id');
+        $id=input('param.id');
         $res=\app\common\model\Admin::dels($id);
         if($res){
           $this->success('删除成功');

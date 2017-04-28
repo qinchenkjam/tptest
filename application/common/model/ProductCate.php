@@ -18,7 +18,7 @@ class ProductCate extends Model
   
     /*数据查询*/
     public static function lists($id=0){
-        $lists=ProductCate::where([])->order('cat_id asc')->paginate(30);
+        $lists=ProductCate::where([])->order('cat_id asc')->paginate(8);
         // $lists=ProductCate::where([])->order('id asc')->select();
         return $lists;
     }
@@ -54,6 +54,15 @@ class ProductCate extends Model
     public static function updatemsgs($data,$id){
         // dump($data);
         $info=ProductCate::where(["cat_id"=>$id])->update($data);
+        if ($info) {
+            return true;
+        }
+    }
+
+    /*分类名是否存在*/
+    public static function is_exist($cat_name){
+        // dump($data);
+        $info=ProductCate::where(["cat_name"=>$cat_name])->field('cat_name')->select();
         if ($info) {
             return true;
         }

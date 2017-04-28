@@ -5,8 +5,7 @@ use think\Db;
 class ArticleCate extends Base
 {
     public function _initialize()
-    {           
-        //$Tree = new \util\Tree;
+    {                
         $Tree = new \util\Tree;
         $list=\app\common\model\ArticleCate::lists(20);           
         $list=$Tree->tree($list);
@@ -41,10 +40,40 @@ class ArticleCate extends Base
 
     public function cateEdit($id)
     {
-       $msg=\app\common\model\ArticleCate::finds($id);      
-       $this->assign("msg",$msg);
-       return $this->fetch('article/cate_edit');
+      
+       if(request()->isPost()){           
+        $data=input('post.cat_name');
+        $id=input("param.cat_id");
+       //dump($data);exit;
+         $list=\app\common\model\ArticleCate::is_exist($data);
+        //var_dump($list);exit();
+          if(!empty($list)){         
+              $this->error('分类已存在');            
+          }
+        $edit=\app\common\model\ArticleCate::updatemsgs($data,$id);
+      
+         
+        }else{
+          $id=input("get.id");     
+          $msg=\app\common\model\ArticleCate::finds($id);
+          //$Tree = new \util\Tree;
+          //$list=\app\common\model\ArticleCate::lists(10);           
+          //$lists=$Tree->tree($list);
+          /*$select='';
+          foreach ($list as $key => $value){
+                    if($value['cat_id']==$msg['pid']){
+                      
+                      $select="selected";
+                    }
+            } */
+         
+          //$this->assign('selected',$select); 
+          //$this->assign('lists',$lists);      
+          $this->assign('msg', $msg);
+          return $this->fetch('article/cate_edit');
+        }
     }
+    
 
 
     public function cateDel($cid)
@@ -58,6 +87,8 @@ class ArticleCate extends Base
         }
         $res=\app\common\model\ArticleCate::dels($cid);
         if($res){
+          //行为记录
+            action_log('del_product_cat', 'product', $res, session('aid'));
           $this->success('删除成功');       
         }      
     }

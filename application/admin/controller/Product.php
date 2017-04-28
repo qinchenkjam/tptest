@@ -28,15 +28,17 @@ class Product extends Base
     {
     	if (Request::instance()->isPost()) {     
     	    $data=[];
-            $data['content']=input('post.editorValue');          
+            $data['content']=input('post.editorValue');
+            $data['add_time']=time();          
             $data=input('post.');
             //获取全部的post变量
             //dump($data);exit;
     		$insert=\app\common\model\Product::inserts($data);
-    		if ($insert) {  			
+    		if ($insert) {
+                action_log('add_product', 'product', $insert, session('aid'));  			
     			$this->success("操作成功","admin/product/index");
     		}else{
-    			$this->success("操作失败");
+    			$this->error("操作失败");
     		}
     		  
     	}
@@ -62,9 +64,13 @@ class Product extends Base
                 //dump($img);exit();
                 if(file_exists($img)){
                    unlink($img);
-                }              
+                }
+                 action_log('edit_product', 'product', $id, session('aid'));              
                 $this->success("更新成功","admin/product/index",1);
+            }else{
+                 $this->error('操作失败');
             }
+
         }else{
 
             return $this->fetch();
@@ -91,6 +97,11 @@ class Product extends Base
      	$res=\app\common\model\Product::dels($map);    
         if($res){
           //unlink("./Uploads/".$data['images']);
+          //行为记录 
+          if(is_array($ids)){
+             $ids=implode(",",$ids);
+          }
+          action_log('del_product', 'product', $ids, session('aid'));
           $this->success('删除成功',url('index'),'1');
         }else{
           $this->error('删除失败');
@@ -98,61 +109,5 @@ class Product extends Base
     }
    
 
-    public function cateIndex()
-    {   
-        /*$Tree = new \util\Tree;
-        $list=Db::table('tb_product_cate')->select();
-        $list=$Tree->tree($list);
-       
-        $this->assign("list",$list); */
-        //dump($list);exit;
-    	return $this->fetch('product/cate_index');
-    }
-
-     public function cateAdd()
-    {
-        $Tree = new \util\Tree;
-        $list=Db::table('tb_product_cate')->select();
-        $list=$Tree->tree($list); 
-        if (Request::instance()->isPost()) {
-
-           $data=input('post.');
-           $inserts=\app\common\model\ProductCate::insert($data);
-           if($inserts){
-                return $this->success('添加成功','admin/product/cateIndex');
-                //return $this->success('添加成功',url('Product/cateIndex'));
-            }else{
-
-                $this->error('添加失败');
-            }
-        }      
-        //dump($list);exit;
-    	return $this->fetch('product/cate_add');
-    }
-
-    public function cateEdit($id)
-    {
-
-       $msg=\app\common\model\ProductCate::finds($id);
-       $Tree = new \util\Tree;
-       $list=Db::table('tb_product_cate')->select();
-       $list=$Tree->tree($list); 
-
-       $this->assign("cate",$list); 
-       $this->assign("msg",$msg);
-       return $this->fetch();
-    }
-
-    public function cateDel($id)
-    {
-        $list=\app\common\model\Product::k_lists($id);
-        if(!empty($list)){
-            //exit('<script>alert("分类下有内容");</script>');
-            $this->error('分类下有内容');            
-        }
-       $res=\app\common\model\ProductCate::dels($id);
-        if($res){
-          $this->success('删除成功');
-        }      
-    }
+   
 }

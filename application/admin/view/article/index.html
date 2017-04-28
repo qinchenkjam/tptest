@@ -21,12 +21,13 @@
 		<button id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜资讯</button>
 	</div>
 </form>
-	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a class="btn btn-primary radius" data-title="添加资讯" _href="{:url('admin/article/newsadd')}" onclick="Hui_admin_tab(this)" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加资讯</a></span> <span class="r">共有数据：<strong>54</strong> 条</span> </div>
+	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="form_del_data()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a class="btn btn-primary radius" data-title="添加资讯" _href="{:url('admin/article/newsadd')}" onclick="Hui_admin_tab(this)" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加资讯</a></span> <span class="r">共有数据：<strong>54</strong> 条</span> </div>
 	<div class="mt-20">
+	<form name="form" method="post" action="{:url('Admin/Article/delAll')}">
 		<table class="table table-border table-bordered table-bg table-hover table-sort">
 			<thead>
 				<tr class="text-c">
-					<th width="25"><input type="checkbox" name="" value=""></th>
+					<th width="25"><input type="checkbox" name="" value="" class="all"></th>
 					<th width="80">ID</th>
 					<th>标题</th>
 					<th width="80">分类</th>
@@ -40,7 +41,7 @@
 			<tbody>
 			 {foreach name="list" item="vo" key="k"}
 				<tr class="text-c">
-					<td><input type="checkbox" value="" name=""></td>
+					<td><input name="id[]" type="checkbox" value="{$vo.id}"></td>
 					<td>{$vo.id}</td>
 					<td class="text-l"><u style="cursor:pointer" class="text-primary" onClick="article_edit('查看','article-zhang.html','10001')" title="查看">{$vo.title}</u></td>
 					<td>{$vo.cat_name}</td>
@@ -97,6 +98,26 @@ function removeinfo(id){
     },function(){}
     );
 }
+</script>
+<script>
+$('.all').click(function() {
+    if($(this).is(':checked')) {
+      $(':checkbox').attr('checked', 'checked');
+    } else {
+      $(':checkbox').removeAttr('checked');
+    }
+});
+
+function form_del_data(){	
+	if($(':checked').size() > 0) {
+		layer.confirm('确认要批量删除吗',function(){
+			//layer.msg('已删除!',{icon:1,time:1000});
+		    document.form.submit();
+		});
+	}else{
+        layer.alert('您没有选择！');
+	}
+} 
 </script>
 </body>
 {/block}

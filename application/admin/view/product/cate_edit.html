@@ -6,20 +6,20 @@
   <form class="Huiform" action="cateEdit?id={$msg.cat_id}" method="post" id="form-article-class">
     栏目： <span class="select-box" style="width:150px">
     <select class="select" id="sel_Sub"  onchange="SetSubID(this);">
-     <option value="0" >--顶级栏目--</option>
+    <option value="0" >--顶级栏目--</option>
 
       {volist name="list" id="vo"}
 
-      <option id="sel"  name="" value="{$vo['cat_id']}" {selected} >{$vo.cat_name}</option>
+      <option id="sel"  name="" value="{$vo['cat_id']}" {if condition="$vo['cat_id'] eq $msg['pid']"}selected{/if} >{$vo.cat_name}</option>
 
       {/volist}   
     </select>
     </span>
-    <input type="hidden" id="hid_ccid" value="{$vo.cat_id}" name="cat_id">
+    <input type="hidden" id="hid_ccid" value="{$msg.cat_id}" name="cat_id">
     排序：
-    <input class="input-text text-c" style="width:50px" type="text" value="{$vo.sort}" placeholder="排序" name="sort" id="class-rank">
+    <input class="input-text text-c" style="width:50px" type="text" value="{$msg.sort}" placeholder="排序" name="sort" id="class-rank">
     分类名：
-    <input class="input-text" style="width:170px" type="text" value="{$vo.cat_name}" placeholder="输入分类" name="cat_name" id="class-val">
+    <input class="input-text" style="width:170px" type="text" value="{$msg.cat_name}" placeholder="输入分类" name="cat_name" id="class-val">
     <div class="text-c mt-20" style="margin-left:-100px;">
       <button type="submit" class="btn btn-success radius" id="" name="" onClick="class_save(this,'2');"><i class="icon-save"></i> 保存</button>
       <a class="btn btn-success radius" id="admin-role-save laclose" href="javascript:history.back()">返回</a>

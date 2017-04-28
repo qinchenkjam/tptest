@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="{$webConfig.WEB_KEYWORDS}" />
+<meta name="description" content="{$webConfig.WEB_DESCRIPTION}" />
+<title>{block name="title"}{$webConfig.WEB_NAME}{/block}</title>
+
+<link href="__HOME__/css/style.css" type="text/css" rel="stylesheet" />
+{block name="style"}{/block}
+</head>
+
+<body>
+<div id="container">
+		<div id="top">
+				<img src="__HOME__/images/tel.jpg" class="right" />
+				<h1>深圳市友来汽车租赁有限公司</h1>
+				<div class="clear"></div>
+				<ul class="nav_ul">
+					   <li style="background:none"><a href="{:url('index/index/index')}">网站首页</a></li>
+					   <li><a href="{:url('index/pages/index',['id'=>'1'])}">公司简介</a></li>
+					   <li><a href="{:url('index/product/index')}">车型展示</a></li>
+					   <li><a href="{:url('index/pages/index',['id'=>'2'])}">租车价格</a></li>
+					   <li><a href="{:url('index/pages/index',['id'=>'2'])}">租车服务</a></li>
+					   <li><a href="{:url('index/pages/index',['id'=>'2'])}">婚车服务</a></li>
+					   <li><a href="{:url('index/news/lists')}">新闻动态</a></li>
+					   <li><a href="{:url('index/pages/index',['id'=>'4'])}">联系我们</a></li>
+				</ul>
+		</div><!--end top-->
+		
+	<!-- banner -->
+	{block name="banner"}
+	
+	{/block}
+	<!-- banner -->
+		<!-- main -->
+	{block name="main"}
+	
+	{/block}
+
+	<!-- main -->
+		
+		<div id="foot">
+		
+				<p align="center">
+			   <a href="index.html">网站首页</a> &nbsp;|&nbsp; 
+			   <a href="aboutus.html">公司简介</a> &nbsp;|&nbsp; 
+			   <a href="products.html">车型展示</a> &nbsp;|&nbsp; 
+			   <a href="jiage.html">租车价格</a> &nbsp;|&nbsp; 
+			   <a href="zuche.html">租车服务</a> &nbsp;|&nbsp; 
+			   <a href="hunche.html">婚车服务</a> &nbsp;|&nbsp; 
+			   <a href="news.html">新闻动态</a> &nbsp;|&nbsp; 
+			   <a href="contact.html">联系我们</a>
+			   </p>
+			   <p align="center" style="padding-top:10px;">
+			  地 址：深圳市南山区南海大道西桃园路南西海明珠花园F座11楼<br />
+			
+			  版权所有：深圳市友来汽车租赁有限公司
+			  </p>
+		</div><!---->
+</div><!--end container-->
+
+<!--banner-->
+<script src="__HOME__/js/172.js"></script> 
+<script src="__HOME__/js/v2239.js"></script>
+
+<!---orther-->
+{block name="script"}
+
+{/block}
+<!---orther/-->
+
+</body>
+</html>
